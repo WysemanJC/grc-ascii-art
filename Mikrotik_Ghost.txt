@@ -1,0 +1,14 @@
+/ip firewall filter
+#Add Jump to new Chain for Art where the source address is the grc.com scanner.  Forward and input chains to bypass existing NAT.
+add action=jump chain=input in-interface=Internet jump-target=GRC_ART src-address=4.79.142.206
+add action=jump chain=forward in-interface=Internet jump-target=GRC_ART src-address=4.79.142.206
+#Add "Reject" rules for port ranges we want to appear in a different color.
+add action=reject chain=GRC_ART dst-port=76-83,108-115,136-151,168-183,198-217,230-249,260-265 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=270-277,282-283,292-297,302-309,314-315,324-327,336-339 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=356-359,368-371,388-391,396-403,408-411,420-423,428-435 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=440-443,460-467,472-475,492-499,504-507,514-521,526-533 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=538-541,546-553,558-565,570-573,571-573,578-605,610-637 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=642-669,674-701,706-733,738-765,770-797,802-829,834-861 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=866-893,898-901,904-909,914-919,922-925,930-933,936-941 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=946-951,954-957,962-963,970-973,978-981,988-989,994-995 protocol=tcp reject-with=icmp-network-unreachable
+add action=reject chain=GRC_ART dst-port=1002-1005,1010-1013,1020-1021,452-455,484-487 protocol=tcp reject-with=icmp-network-unreachable
